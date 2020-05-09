@@ -1,0 +1,3 @@
+# .gitattributes file
+
+**AndroidManifest.xml filter=UpdateGoogleMapsAPI
