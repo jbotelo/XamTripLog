@@ -7,21 +7,31 @@
              x:Class="TripLog.Views.NewEntryPage"
              Title="New Entry">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save"/>
+        <ToolbarItem Text="Save"
+                     Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <TableView Intent="Form">
             <TableView.Root>
                 <TableSection>
-                    <EntryCell Label="Title" />
+                    <EntryCell x:Name="title"
+                               Label="Title"
+                               Text="{Binding Title}" />
                     <EntryCell Label="Latitude"
-                               Keyboard="Numeric"/>
+                               Keyboard="Numeric"
+                               Text="{Binding Latitude}" />
                     <EntryCell Label="Longitude"
-                               Keyboard="Numeric"/>
-                    <EntryCell Label="Date"/>
-                    <EntryCell Label="Raiting"
-                               Keyboard="Numeric"/>
-                    <EntryCell Label="Notes"/>
+                               Keyboard="Numeric"
+                               Text="{Binding Longitude}" />
+                    <EntryCell Label="Date"
+                               Text="{Binding Date,
+                        StringFormat='{0:d}'}" />
+                    <EntryCell x:Name="rating"
+                               Label="Raiting"
+                               Keyboard="Numeric"
+                               Text="{Binding Rating}" />
+                    <EntryCell Label="Notes"
+                               Text="{Binding Notes}" />
                 </TableSection>
             </TableView.Root>
         </TableView>
