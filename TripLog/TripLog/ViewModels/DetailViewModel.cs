@@ -1,8 +1,9 @@
 ﻿using TripLog.Models;
+using TripLog.Services;
 
 namespace TripLog.ViewModels
 {
-    internal class DetailViewModel : BaseViewModel
+    internal class DetailViewModel : BaseViewModel<TripLogEntry>
     {
         private TripLogEntry _entry;
 
@@ -16,9 +17,14 @@ namespace TripLog.ViewModels
             }
         }
 
-        public DetailViewModel(TripLogEntry entry)
+        public DetailViewModel(INavService navService)
+            : base(navService)
         {
-            Entry = entry;
+        }
+
+        public override void Init(TripLogEntry parameter)
+        {
+            Entry = parameter;
         }
     }
 }

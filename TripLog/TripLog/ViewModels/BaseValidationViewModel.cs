@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using TripLog.Services;
 using Xamarin.Forms;
 
 namespace TripLog.ViewModels
@@ -19,7 +20,8 @@ namespace TripLog.ViewModels
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
-        public BaseValidationViewModel()
+        public BaseValidationViewModel(INavService navService)
+            : base(navService)
         {
         }
 
