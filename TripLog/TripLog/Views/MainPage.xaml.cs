@@ -17,8 +17,6 @@ namespace TripLog.Views
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainViewModel(DependencyService
-                .Get<INavService>());
         }
 
         protected override void OnAppearing()

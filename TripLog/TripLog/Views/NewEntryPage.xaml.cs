@@ -21,9 +21,6 @@ namespace TripLog.Views
 
             BindingContextChanged += Page_BindingContextChanged;
 
-            BindingContext = new NewEntryViewModel(DependencyService
-                .Get<INavService>());
-
         }
         void Page_BindingContextChanged(object sender, EventArgs ea)
         {

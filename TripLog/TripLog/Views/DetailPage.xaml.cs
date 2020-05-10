@@ -15,8 +15,6 @@ namespace TripLog.Views
         public DetailPage()
         {
             InitializeComponent();
-            BindingContext = new DetailViewModel(DependencyService
-                .Get<INavService>());
         }
 
         void UpdateMap()

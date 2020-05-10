@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TripLog.Models;
 using TripLog.Services;
@@ -92,9 +93,14 @@ namespace TripLog.ViewModels
             _saveCommand ?? (_saveCommand = new Command(async () =>
             await Save(), CanSave));
 
-        public NewEntryViewModel(INavService navService)
+        readonly ILocationService _locService;
+
+        public NewEntryViewModel(INavService navService,
+            ILocationService locService)
             : base(navService)
         {
+            _locService = locService;
+
             Date = DateTime.Today;
             Rating = 1;
         }
@@ -119,8 +125,19 @@ namespace TripLog.ViewModels
         private bool CanSave() => !string.IsNullOrWhiteSpace(Title)
             && !HasErrors;
 
-        public override void Init()
+        public override async void Init()
         {
+            try
+            {
+                var coords = await _locService.GetGeoCoordinatesAsync();
+
+                Latitude = coords.Latitude;
+                Longitude = coords.Longitude;
+            }
+            catch (Exception)
+            {
+                // TODO: handle exceptions from location service
+            }
         }
     }
 }

@@ -65,6 +65,8 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Modules\TripLogPlatformModule.cs" />
+    <Compile Include="Services\LocationServices.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,8 +125,11 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Portable.Ninject">
+      <Version>3.3.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.1" />
     <PackageReference Include="Xamarin.Forms.Maps">
       <Version>4.6.0.726</Version>
     </PackageReference>
@@ -136,4 +141,5 @@
       <Name>TripLog</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
 </Project>
