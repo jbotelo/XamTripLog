@@ -5,7 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:converters="clr-namespace:TripLog.Converters;assembly=TripLog"
              x:Class="TripLog.Views.DetailPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:RatingToStarImageNameConverter
+                x:Key="RatingToStartImageNameConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -17,23 +24,31 @@
             <maps:Map x:Name="map" Grid.RowSpan="3" />
 
             <BoxView Grid.Row="1" BackgroundColor="White"
-                     Opacity=".8"/>
+                     Opacity=".8" />
 
             <StackLayout Padding="10" Grid.Row="1">
                 <Label x:Name="title"
                        HorizontalOptions="Center"
-                       Text="{Binding Entry.Title}"/>
+                       Text="{Binding Entry.Title}"
+                       AutomationProperties.IsInAccessibleTree="True"
+                       AutomationProperties.HelpText="Title of trip" />
                 <Label x:Name="date"
                        HorizontalOptions="Center"
                        Text="{Binding Entry.Date,
-                    StringFormat='{0:M}'}"/>
-                <Label x:Name="rating"
-                       HorizontalOptions="Center"
-                       Text="{Binding Entry.Rating,
-                    StringFormat='{0} star rating'}"/>
+                    StringFormat='{0:M}'}"
+                       AutomationProperties.IsInAccessibleTree="True"
+                       AutomationProperties.HelpText="Date of trip" />
+                <Image HorizontalOptions="Center" Source="{Binding
+                    Entry.Rating, Converter={StaticResource
+                    RatingToStartImageNameConverter}}"
+                       AutomationProperties.IsInAccessibleTree="True"
+                       AutomationProperties.HelpText="{Binding Entry.Rating,
+                    StringFormat='{0} star rating'}" />
                 <Label x:Name="notes"
                        HorizontalOptions="Center"
-                       Text="{Binding Entry.Notes}"/>
+                       Text="{Binding Entry.Notes}"
+                       AutomationProperties.IsInAccessibleTree="True"
+                       AutomationProperties.HelpText="Notes from trip" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

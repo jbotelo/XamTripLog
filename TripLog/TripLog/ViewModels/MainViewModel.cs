@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using TripLog.Models;
 using TripLog.Services;
 using Xamarin.Forms;
@@ -29,6 +30,10 @@ namespace TripLog.ViewModels
         public Command NewCommand => new Command(async () =>
            await NavService.NavigateTo<NewEntryViewModel>());
 
+        Command _refreshCommand;
+        public Command RefreshCommand => _refreshCommand ??
+            (_refreshCommand = new Command(LoadEntries));
+
         public MainViewModel(INavService navService)
             : base(navService)
         {
@@ -42,35 +47,49 @@ namespace TripLog.ViewModels
 
         void LoadEntries()
         {
-            LogEntries.Clear();
+            if (IsBusy)
+            {
+                return;
+            }
 
-            LogEntries.Add(new TripLogEntry
+            IsBusy = true;
+
+            // TODO: Remove this in chapter 6
+            Task.Delay(3000).ContinueWith(_ => Device
+            .BeginInvokeOnMainThread(() =>
             {
-                Title = "Washington Monument",
-                Notes = "Amazing!",
-                Rating = 3,
-                Date = new DateTime(2019, 2, 5),
-                Latitude = 38.8895,
-                Longitude = -77.0352
-            });
-            LogEntries.Add(new TripLogEntry
-            {
-                Title = "Statue of Liberty",
-                Notes = "Inspiring!",
-                Rating = 4,
-                Date = new DateTime(2019, 4, 13),
-                Latitude = 40.6892,
-                Longitude = -74.0444
-            });
-            LogEntries.Add(new TripLogEntry
-            {
-                Title = "Golden Gate Bridge",
-                Notes = "Foggy, but beautiful.",
-                Rating = 5,
-                Date = new DateTime(2019, 4, 26),
-                Latitude = 37.8268,
-                Longitude = -122.4798
-            });
+                LogEntries.Clear();
+
+                LogEntries.Add(new TripLogEntry
+                {
+                    Title = "Washington Monument",
+                    Notes = "Amazing!",
+                    Rating = 3,
+                    Date = new DateTime(2019, 2, 5),
+                    Latitude = 38.8895,
+                    Longitude = -77.0352
+                });
+                LogEntries.Add(new TripLogEntry
+                {
+                    Title = "Statue of Liberty",
+                    Notes = "Inspiring!",
+                    Rating = 4,
+                    Date = new DateTime(2019, 4, 13),
+                    Latitude = 40.6892,
+                    Longitude = -74.0444
+                });
+                LogEntries.Add(new TripLogEntry
+                {
+                    Title = "Golden Gate Bridge",
+                    Notes = "Foggy, but beautiful.",
+                    Rating = 5,
+                    Date = new DateTime(2019, 4, 26),
+                    Latitude = 37.8268,
+                    Longitude = -122.4798
+                });
+
+                IsBusy = false;
+            }));
         }
     }
 }

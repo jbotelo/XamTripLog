@@ -8,6 +8,17 @@ namespace TripLog.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected INavService NavService { get; private set; }
+
+        bool _isBusy;
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set
+            {
+                _isBusy = value;
+                OnPropertyChanged();
+            }
+        }
         protected BaseViewModel(INavService navService)
         {
             NavService = navService;
