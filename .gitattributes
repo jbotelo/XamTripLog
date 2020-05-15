@@ -1,3 +1,4 @@
 # .gitattributes file
 
 **AndroidManifest.xml filter=UpdateGoogleMapsAPI
+**TripLogCoreModule.cs filter=EntriesAPIServer
