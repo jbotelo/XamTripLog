@@ -20,8 +20,9 @@ namespace TripLog.ViewModels
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
-        public BaseValidationViewModel(INavService navService)
-            : base(navService)
+        public BaseValidationViewModel(INavService navService,
+            IAnalyticsService analyticsService)
+            : base(navService, analyticsService)
         {
         }
 

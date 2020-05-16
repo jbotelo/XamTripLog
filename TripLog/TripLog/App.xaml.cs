@@ -1,4 +1,7 @@
-﻿using Ninject;
+﻿using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Ninject;
 using Ninject.Modules;
 using System;
 using TripLog.Modules;
@@ -46,6 +49,9 @@ namespace TripLog
 
         protected override void OnStart()
         {
+            AppCenter.Start("ios={Your iOS app secret here};"
+                + "android={Your Android app secret here}",
+                typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()

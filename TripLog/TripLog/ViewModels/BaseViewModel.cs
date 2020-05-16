@@ -19,9 +19,12 @@ namespace TripLog.ViewModels
                 OnPropertyChanged();
             }
         }
-        protected BaseViewModel(INavService navService)
+        protected IAnalyticsService AnalyticsService { get; private set; }
+        protected BaseViewModel(INavService navService,
+            IAnalyticsService analyticsService)
         {
             NavService = navService;
+            AnalyticsService = analyticsService;
         }
 
         protected virtual void OnPropertyChanged(
@@ -38,8 +41,9 @@ namespace TripLog.ViewModels
 
     public class BaseViewModel<TParameter> : BaseViewModel
     {
-        protected BaseViewModel(INavService navService)
-            : base(navService)
+        protected BaseViewModel(INavService navService,
+            IAnalyticsService analyticsService)
+            : base(navService, analyticsService)
         {
         }
 

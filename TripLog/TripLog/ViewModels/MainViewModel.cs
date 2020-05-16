@@ -39,8 +39,9 @@ namespace TripLog.ViewModels
 
         private readonly IBlobCache _cache;
         public MainViewModel(INavService navService,
-            ITripLogDataService tripLogService, IBlobCache cache)
-            : base(navService)
+            ITripLogDataService tripLogService, IBlobCache cache,
+            IAnalyticsService analyticsService)
+            : base(navService, analyticsService)
         {
             _tripLogService = tripLogService;
             _cache = cache;
@@ -53,7 +54,7 @@ namespace TripLog.ViewModels
             LoadEntries();
         }
 
-        async void LoadEntries()
+        void LoadEntries()
         {
             if (IsBusy)
             {
@@ -70,7 +71,14 @@ namespace TripLog.ViewModels
                 {
                     LogEntries = new ObservableCollection<TripLogEntry>(entries);
                     IsBusy = false;
-                }); 
+                });
+            }
+            catch (Exception e)
+            {
+                AnalyticsService.TrackError(e, new Dictionary<string, string>
+                {
+                    {"Method", "MainViewModel.LoadEntries()" }
+                });
             }
             finally
             {

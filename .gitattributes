@@ -2,3 +2,4 @@
 
 **AndroidManifest.xml filter=UpdateGoogleMapsAPI
 **TripLogCoreModule.cs filter=EntriesAPIServer
+**App.xaml.cs filter=UpdateAnalyticsAppSecret
