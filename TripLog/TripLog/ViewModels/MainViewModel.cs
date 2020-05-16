@@ -38,6 +38,9 @@ namespace TripLog.ViewModels
         private readonly ITripLogDataService _tripLogService;
 
         private readonly IBlobCache _cache;
+
+        public Command SignOutCommand => new Command(_tripLogService
+            .Unauthenticate);
         public MainViewModel(INavService navService,
             ITripLogDataService tripLogService, IBlobCache cache)
             : base(navService)
@@ -53,7 +56,7 @@ namespace TripLog.ViewModels
             LoadEntries();
         }
 
-        async void LoadEntries()
+        void LoadEntries()
         {
             if (IsBusy)
             {
