@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace TripLog.ViewModels
 {
-    internal class BaseValidationViewModel : BaseViewModel,
+    public class BaseValidationViewModel : BaseViewModel,
         INotifyDataErrorInfo
     {
         public bool HasErrors =>

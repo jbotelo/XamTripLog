@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace TripLog.ViewModels
 {
-    internal class NewEntryViewModel : BaseValidationViewModel
+    public class NewEntryViewModel : BaseValidationViewModel
     {
         private string _title;
 

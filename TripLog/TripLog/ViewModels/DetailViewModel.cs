@@ -3,7 +3,7 @@ using TripLog.Services;
 
 namespace TripLog.ViewModels
 {
-    internal class DetailViewModel : BaseViewModel<TripLogEntry>
+    public class DetailViewModel : BaseViewModel<TripLogEntry>
     {
         private TripLogEntry _entry;
 
@@ -22,6 +22,10 @@ namespace TripLog.ViewModels
         {
         }
 
+        public override void Init()
+        {
+            throw new EntryNotProvidedException();
+        }
         public override void Init(TripLogEntry parameter)
         {
             Entry = parameter;
